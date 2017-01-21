@@ -1,0 +1,158 @@
+commit 36902526b66907f1f4b0add9900d8a82521b45d4 (HEAD, tag: release-1.31.0, origin/master, origin/HEAD, master)
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Update NEWS
+
+commit dc84ca14e5951646e49d2eaccde9f9b8a7841a44
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Update doc
+
+commit b3ece25fde9b05b2d3187c119891d717f325564e
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Bump up version number to 1.31.0
+
+commit f55fced91f6205294843a5f8afcaafc41e92f30f
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Update bash_completion
+
+commit eecb5e055e5e2659d7da8d33d8acf83efac63a94
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    clang-format
+
+commit c7551a173f4cee50a7b3dad9a1dc1d17f5c2628f
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Update AUTHORS
+
+commit 7cd92850851535caffdcc7640d30fee0ebe99357
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-16
+
+    Update binary build dependencies
+
+commit 6625f8cadbb59134a675c2fbd12357e6d19df9a4
+Merge: c1a0b335 744a5a55
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-16
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2017-01-16
+
+    Merge pull request #836 from aria2/better-file-status-error-msg
+    
+    Better error message when local file status cannot be retrieved
+
+commit 744a5a550df748dcbbbd2587bc7c84381f52ed0c
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-15
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-15
+
+    Better error message when local file status cannot be retrieved
+
+commit c1a0b335159a6d002f4cc35f0b66397af0f39759
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-09
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-09
+
+    Add constexpr if possible
+
+commit 6abf2388ccec6332d03bb6e606227d5f527f24d9
+Merge: 5d2742da e2dc0902
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-07
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2017-01-07
+
+    Merge pull request #823 from aria2/fix-getrandom-assertion-failure
+    
+    Fix assertion failure in SimpleRandomizer::getRandomBytes
+
+commit e2dc0902bb379986835f119828b86dc0100bafaa
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-06
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2017-01-06
+
+    Fix assertion failure in SimpleRandomizer::getRandomBytes
+    
+    errno might not be initialized to 0, and we may get both rv == -1 and
+    errno != ENOSYS.  This leads to assertion failure.  Since
+    getrandom_linux always returns -1 on failure, checking errno is
+    useless in this function.
+
+commit 5d2742da154b388d69b59bf28716c4c3c8970646
+Merge: b5d64230 12798e77
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2017-01-01
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2017-01-01
+
+    Merge pull request #821 from ITriskTI/patch-1
+    
+    Update aria2c.rst
+
+commit 12798e778e5fcc9bee04916b973990ff83e844e2
+Author:     ITriskTI <ITriskTI@gmail.com>
+AuthorDate: 2016-12-31
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2016-12-31
+
+    Update aria2c.rst
+
+commit b5d64230ba24ae1995806252594eab137209d1a7
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2016-12-31
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2016-12-31
+
+    Cast to unsigned char before passing it as uint32_t
+
+commit b9e51e9b1509f2d7d379608755fa0503ee7a64d1
+Merge: f542f84b 2efc5a92
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2016-12-31
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2016-12-31
+
+    Merge branch 'Jimmy-Z-master'
+
+commit 2efc5a9288bd208e58372a66c79ac7f04d649a36
+Author:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+AuthorDate: 2016-12-31
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2016-12-31
+
+    Document --content-disposition-default-utf8 opiton
+
+commit da730478af0cdae2936053d6f9789cee12c95b7d
+Author:     JimmyZ <jimmy.z.z@gmail.com>
+AuthorDate: 2016-12-28
+Commit:     Tatsuhiro Tsujikawa <tatsuhiro.t@gmail.com>
+CommitDate: 2016-12-31
+
+    new option content-disposition-default-utf8

@@ -1,0 +1,31 @@
+aria2 1.31.0
+============
+
+Release Note
+------------
+
+This release fixes assertion error in
+SimpleRandomizer::getRandomBytes.  It adds new option
+content-disposition-default-utf8.
+
+Changes
+-------
+
+* Better error message when local file status cannot be retrieved
+
+  GH-836
+
+* Fix assertion failure in SimpleRandomizer::getRandomBytes
+
+  errno might not be initialized to 0, and we may get both rv == -1
+  and errno != ENOSYS.  This leads to assertion failure.  Since
+  getrandom_linux always returns -1 on failure, checking errno is
+  useless in this function.
+
+  GH-823
+
+* Add option content-disposition-default-utf8
+
+  Patch from JimmyZ
+
+  GH-813
