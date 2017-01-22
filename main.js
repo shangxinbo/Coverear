@@ -1,4 +1,5 @@
 const electron = require('electron')
+const {startJsonRPC} = require('./src/mAria2')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -11,9 +12,9 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({ width: 800, height: 600 })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -37,7 +38,15 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', () => {
+  startJsonRPC(err => {
+    if (err) {
+      console.log(err)
+    } else {
+      createWindow()
+    }
+  })
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

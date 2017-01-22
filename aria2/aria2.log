@@ -1,0 +1,17 @@
+
+2017-01-22 14:28:48.022618 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 15:16:16.197932 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 15:43:53.394383 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 15:46:10.868415 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 16:09:14.710110 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 16:11:05.711953 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 16:13:54.877337 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 16:14:14.780807 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat

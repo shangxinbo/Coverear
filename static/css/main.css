@@ -1,0 +1,24 @@
+html, button, input, select, textarea,
+    .pure-g [class *= "pure-u"] {
+        /* Set your content font stack here: */
+        font-family: Georgia, Times, "Times New Roman", "微软雅黑";
+    }
+.main{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.table-list{
+    width: 100%;
+}
+.button-blue{
+    background: #2e95f5;
+    border-radius:0px; 
+    color:white;
+}
+.button-cicle{
+    background: #2e95f5;
+    border-radius:25px;
+    font-size:14px; 
+    float: right;
+    color: white;
+}
