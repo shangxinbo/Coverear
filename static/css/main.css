@@ -10,11 +10,6 @@ html, button, input, select, textarea,
 .table-list{
     width: 100%;
 }
-.button-blue{
-    background: #2e95f5;
-    border-radius:0px; 
-    color:white;
-}
 .button-cicle{
     background: #2e95f5;
     border-radius:25px;

@@ -18,7 +18,7 @@ aria2.onsend = function (m) {
 };
 
 aria2.onmessage = function (m) {
-  console.log('aria2 IN', m);
+  //console.log('aria2 IN', m);
 };
 
 aria2.onclose = function () {
@@ -33,19 +33,24 @@ aria2.onDownloadStart = function (gid) {
 
 
 aria2.open(function () {
+  let app = new Vue({
+    el: 'body',
+    data: {
+      nav: 1
+    }
+  })
   var vm = new Vue({
     el: '#activeList',
     data: {
       list: []
     },
-    mounted: () => {
+    mounted: function () {
       let _this = this;
       setInterval(() => {
         aria2.send('tellActive').then(function (m) {
           _this.list = m;
-          console.log(m);
         })
-      }, 1500)
+      }, 20000)
     }
   })
 

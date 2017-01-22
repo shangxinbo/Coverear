@@ -27,3 +27,6 @@ Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT ro
 Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
 2017-01-22 18:56:50.453733 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
 Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-22 21:45:46.943279 [ERROR] [AbstractCommand.cc:351] CUID#14 - Download aborted. URI=https://download.jetbrains.com/webstorm/WebStorm-2016.3.2.exe
+Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://download.jetbrains.8686c.com/webstorm/WebStorm-2016.3.2.exe
+  -> [DownloadCommand.cc:312] errorCode=5 Too slow Downloading speed: 9446 <= 10240(B/s), host:download.jetbrains.8686c.com
