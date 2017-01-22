@@ -30,16 +30,25 @@ aria2.onDownloadStart = function (gid) {
 }
 
 // open WebSocket
+
+
 aria2.open(function () {
-  aria2.send('tellActive').then(function (m) {
-    console.log(m);
-    var vm = new Vue({
-      el: '#activeList',
-      data: {
-        list: m
-      }
-    })
+  var vm = new Vue({
+    el: '#activeList',
+    data: {
+      list: []
+    },
+    mounted: () => {
+      let _this = this;
+      setInterval(() => {
+        aria2.send('tellActive').then(function (m) {
+          _this.list = m;
+          console.log(m);
+        })
+      }, 1500)
+    }
   })
+
   aria2.send('tellWaiting', 0, 10).then(function (m) {
     console.log(m)
   })
@@ -63,7 +72,7 @@ aria2.open(function () {
     data: {},
     methods: {
       addUri: function (url) {
-        aria2.send('addUri', ['https://download.jetbrains.com/webstorm/WebStorm-2016.3.2.exe']).then((m)=>{
+        aria2.send('addUri', ['https://download.jetbrains.com/webstorm/WebStorm-2016.3.2.exe']).then((m) => {
           console.log(m)
         })
       }

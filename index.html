@@ -28,6 +28,8 @@
           <th>index</th>
           <th>gid</th>
           <th>file</th>
+          <th>完成进度</th>
+          <th>下载速度</th>
           <th>size</th>
         </tr>
       </thead>
@@ -36,6 +38,8 @@
           <td>{{index+1}}</td>
           <td>{{tr.gid}}</td>
           <td>{{tr.files[0].path}}</td>
+          <td>{{tr.completedLength}}</td>
+          <td>{{tr.downloadSpeed}}</td>
           <td>{{tr.totalLength}}</td>
         </tr>
       </tbody>
