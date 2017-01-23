@@ -16,20 +16,50 @@ html, button, input, select, textarea,
     width: 100%;
     border:none;
 }
-.table-list tr:after{
-    content:'&nbsp;';
-    background:#ccc ;
-    width:50%;
-    position: absolute;
-    left: 0;
-    top: 0;
+.active-list{
+    display: block;
+}
+.active-list tbody{
+    display: block;
+}
+.active-list tbody tr{
+    display: block;
+    width: 100%;
+}
+.todoPic a{
+    height: 2rem;
+}
+.todoPic a.add{
+    background:url('../img/add.svg');
+}
+.todoPic a.stop{
+    background: url('../img/stop.svg') ;
+}
+.todoPic a.play{
+    background: url('../img/play.svg');
+}
+.todoPic a.delete{
+    background: url('../img/delete.svg');
+}
+
+.todoPic a.add:hover{
+    background: '../img/add.svg';
+    background: #ccc;
+}
+.todoPic a.stop:hover{
+    background: '../img/stop.svg';
+    background: #ccc;
+}
+
+.todoPic a.play:hover{
+    background: '../img/play.svg';
+    background: #ccc;
+}
+.todoPic a.delete:hover{
+    background: '../img/delete.svg';
+    background: #ccc;
 }
 
 
-.button-cicle{
-    background: #2e95f5;
-    border-radius:25px;
-    font-size:14px; 
-    float: right;
-    color: white;
-}
+
+
