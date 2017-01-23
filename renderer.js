@@ -26,11 +26,22 @@ aria2.open(function () {
 
     Vue.component('active-list', {
         template: '#activeList',
-        props:['nav'],
+        props: ['nav'],
         data: function () {
             return {
                 list: []
             }
+        },
+        filters: {
+            fileName: formatFileName,
+            speed: function (value) {
+                if (value > 1024 * 1024) {
+                    return (value / 1024 / 1024).toFixed(2) + 'MB/s'
+                } else {
+                    return (value / 1024).toFixed(2) + 'KB/s'
+                }
+            },
+            byte: formatByte
         },
         mounted: function () {
             let _this = this
@@ -38,12 +49,12 @@ aria2.open(function () {
                 aria2.send('tellActive').then(function (m) {
                     _this.list = m
                 })
-            }, 20000)
+            }, 2000)
         }
     })
     Vue.component('complete-list', {
         template: '#completeList',
-        props:['nav'],
+        props: ['nav'],
         data: function () {
             return {
                 list: []
@@ -71,7 +82,7 @@ aria2.open(function () {
         },
         methods: {
             addUri: function (url) {
-                aria2.send('addUri', ['https://download.jetbrains.com/webstorm/WebStorm-2016.3.2.exe']).then((m) => {
+                aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {
                 })
             },
             changeNav: function (num) {
@@ -84,3 +95,21 @@ aria2.open(function () {
     //https://github.com/git-for-windows/git/releases/download/v2.11.0.windows.3/Git-2.11.0.3-64-bit.exe
     //magnet:?xt=urn:btih:22badeca61daa14ac97f73aa691b838520d27225&dn=The.Man.with.Thousand.Faces.2016.720p.BluRay.x264-BiPOLAR%5Brarbg%5D&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2710%2Fannounce&//tr=udp%3A%2F%2F9.rarbg.to%3A2710%2Fannounce
 })
+
+function formatFileName(value) {
+    let val = value.toString()
+    if (val) {
+        if (value.length > 60) {
+            return value.substr(0, 67) + '…'
+        } else {
+            return value
+        }
+    }
+}
+function formatByte(value) {
+    if (value > 1024 * 1024) {
+        return (value / 1024 / 1024).toFixed(2) + 'MB'
+    } else {
+        return (value / 1024).toFixed(2) + 'KB'
+    }
+}

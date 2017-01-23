@@ -1,7 +1,12 @@
+@font-face{
+    font-family: roboto;
+    src: url('../font/Roboto-LightItalic.woff2');
+}
+
 html, button, input, select, textarea,
     .pure-g [class *= "pure-u"] {
         /* Set your content font stack here: */
-        font-family: Georgia, Times, "Times New Roman", "微软雅黑";
+        font-family: roboto,'微软雅黑',Arial, Helvetica, sans-serif;
     }
 .main{
     max-width: 1000px;
@@ -9,7 +14,18 @@ html, button, input, select, textarea,
 }
 .table-list{
     width: 100%;
+    border:none;
 }
+.table-list tr:after{
+    content:'&nbsp;';
+    background:#ccc ;
+    width:50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
 .button-cicle{
     background: #2e95f5;
     border-radius:25px;
