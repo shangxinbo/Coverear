@@ -1,100 +1,112 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Hello World!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="static/css/pure-min.css" />
-  <link rel="stylesheet" type="text/css" href="static/css/main.css" />
-  <script src="src/vue.min.js" /></script>
-</head>
-
-<body class="pure-g">
-  <div class="pure-u-1-1 main">
-    <h2>尚新波</h2>
-    <div id="dobtn" class="pure-menu pure-menu-horizontal">
-      <ul class="pure-menu-list">
-        <li class="pure-menu-item" :class="{pure-menu-selected:nav==1}"><a href="#" class="pure-menu-link">正在下载</a></li>
-        <li class="pure-menu-item" :class="{pure-menu-selected:nav==2}"><a href="#" class="pure-menu-link">已下载</a></li>
-        <li class="pure-menu-item" :class="{pure-menu-selected:nav==3}"><a href="#" class="pure-menu-link">下载失败</a></li>
-      </ul>
-      <div class="pure-u-1-3">
-        <a class="pure-button button-cicle" @click="addUri">添加下载</a>
-      </div>
-    </div>
-    <table id="activeList" v-show="nav==1" class="pure-table pure-table-horizontal table-list">
-      <thead>
-        <tr>
-          <th>index</th>
-          <th>gid</th>
-          <th>file</th>
-          <th>完成进度</th>
-          <th>下载速度</th>
-          <th>size</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(tr,index) in list">
-          <td>{{index+1}}</td>
-          <td>{{tr.gid}}</td>
-          <td>{{tr.files[0].path}}</td>
-          <td>{{tr.completedLength}}</td>
-          <td>{{tr.downloadSpeed}}</td>
-          <td>{{tr.totalLength}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <table id="completeList" v-show="nav==2" class="pure-table pure-table-horizontal table-list">
-      <thead>
-        <tr>
-          <th>index</th>
-          <th>gid</th>
-          <th>file</th>
-          <th>size</th>
-          <th>todo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(tr,index) in list">
-          <td>{{index+1}}</td>
-          <td>{{tr.gid}}</td>
-          <td>{{tr.files[0].path}}</td>
-          <td>{{tr.totalLength}}</td>
-          <td @click="del(tr.gid)">删除</td>
-        </tr>
-      </tbody>
-    </table>
-    <table id="pauseList" v-show="nav==3" class="pure-table pure-table-horizontal table-list">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Make</th>
-          <th>Model</th>
-          <th>Year</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Honda</td>
-          <td>Accord</td>
-          <td>2009</td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>Toyota</td>
-          <td>Camry</td>
-          <td>2012</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</body>
-<script>
-  // You can also require other files to run in this process
-  require('./renderer.js')
-</script>
-
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello World!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="static/css/pure-min.css" />
+        <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+        <script src="src/vue.min.js" /></script>
+        <script type="text/x-template" id="activeList">
+            <table v-show="nav==1" class="pure-table pure-table-horizontal table-list">
+                <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>gid</th>
+                        <th>file</th>
+                        <th>完成进度</th>
+                        <th>下载速度</th>
+                        <th>size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(tr,index) in list">
+                        <td>{{index+1}}</td>
+                        <td>{{tr.gid}}</td>
+                        <td>{{tr.files[0].path}}</td>
+                        <td>{{tr.completedLength}}</td>
+                        <td>{{tr.downloadSpeed}}</td>
+                        <td>{{tr.totalLength}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+        <script type="text/x-template" id="completeList">
+            <table v-show="nav==2" class="pure-table pure-table-horizontal table-list">
+                <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>gid</th>
+                        <th>file</th>
+                        <th>size</th>
+                        <th>todo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(tr,index) in list">
+                        <td>{{index+1}}</td>
+                        <td>{{tr.gid}}</td>
+                        <td>{{tr.files[0].path}}</td>
+                        <td>{{tr.totalLength}}</td>
+                        <td @click="del(tr.gid)">删除</td>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+        <script type="text/x-template" id="pauseList">
+            <table class="pure-table pure-table-horizontal table-list">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Honda</td>
+                        <td>Accord</td>
+                        <td>2009</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Toyota</td>
+                        <td>Camry</td>
+                        <td>2012</td>
+                    </tr>
+                </tbody>
+            </table>
+        </script>
+    </head>
+    <body class="pure-g">
+        <div id="tabNav" class="pure-u-1-1 main">
+            <h2></h2>
+            <div class="pure-menu pure-menu-horizontal">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==1}" @click="changeNav(1)">
+                        <a href="#" class="pure-menu-link">正在下载</a>
+                    </li>
+                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==2}" @click="changeNav(2)">
+                        <a href="#" class="pure-menu-link">已下载</a>
+                    </li>
+                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==3}" @click="changeNav(3)">
+                        <a href="#" class="pure-menu-link">下载失败</a>
+                    </li>
+                </ul>
+                <div class="pure-u-1-3">
+                    <a class="pure-button button-cicle" @click="addUri">添加下载</a>
+                </div>
+            </div>
+            <active-list :nav="nav"></active-list>
+            <complete-list :nav="nav"></active-list>
+            <pause-list :nav="nav"></active-list>
+        </div>
+    </body>
+    <script>
+        // You can also require other files to run in this process
+        require('./renderer.js')
+    </script>
 </html>
