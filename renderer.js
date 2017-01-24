@@ -13,28 +13,28 @@ let options = {
 }
 let aria2 = new Aria2([options]);
 
-aria2.onsend = function (m) {
+aria2.onsend = function(m) {
     //console.log('aria2 OUT', m);
 };
 
-aria2.onmessage = function (m) {
+aria2.onmessage = function(m) {
     //console.log('aria2 IN', m);
 };
 
 // open WebSocket
-aria2.open(function () {
+aria2.open(function() {
 
     Vue.component('active-list', {
         template: '#activeList',
         props: ['nav'],
-        data: function () {
+        data: function() {
             return {
                 list: []
             }
         },
         filters: {
             fileName: formatFileName,
-            speed: function (value) {
+            speed: function(value) {
                 if (value > 1024 * 1024) {
                     return (value / 1024 / 1024).toFixed(2) + 'MB/s'
                 } else {
@@ -58,10 +58,10 @@ aria2.open(function () {
                 }
             }
         },
-        mounted: function () {
+        mounted: function() {
             let _this = this
             setInterval(() => {
-                aria2.send('tellActive').then(function (m) {
+                aria2.send('tellActive').then(function(m) {
                     _this.list = m
                     for (let i = 0; i < _this.list.length; i++) {
                         let vs = _this.list[i]
@@ -75,19 +75,19 @@ aria2.open(function () {
     Vue.component('complete-list', {
         template: '#completeList',
         props: ['nav'],
-        data: function () {
+        data: function() {
             return {
                 list: []
             }
         },
-        mounted: function () {
+        mounted: function() {
             let _this = this
-            aria2.send('tellStopped', 0, 10).then(function (m) {
+            aria2.send('tellStopped', 0, 10).then(function(m) {
                 _this.list = m
             })
         },
         methods: {
-            del: function (gid) {
+            del: function(gid) {
                 aria2.send('remove', gid)
             }
         }
@@ -96,14 +96,14 @@ aria2.open(function () {
     Vue.component('pause-list', {
         template: '#pauseList',
         props: ['nav'],
-        data: function () {
+        data: function() {
             return {
                 list: []
             }
         },
         filters: {
             fileName: formatFileName,
-            speed: function (value) {
+            speed: function(value) {
                 if (value > 1024 * 1024) {
                     return (value / 1024 / 1024).toFixed(2) + 'MB/s'
                 } else {
@@ -127,7 +127,7 @@ aria2.open(function () {
                 }
             }
         },
-        mounted: function () {
+        mounted: function() {
             let _this = this
             setInterval(() => {
                 aria2.send('tellWaiting', 0, 10).then(m => {
@@ -147,20 +147,19 @@ aria2.open(function () {
 
     let dobtn = new Vue({
         el: '#tabNav',
-        data: function () {
+        data: function() {
             return {
                 nav: 1
             }
         },
-        methods: {    // 不能用箭头函数
-            addUri: function (url) {
-                aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {
-                })
+        methods: { // 不能用箭头函数
+            addUri: function(url) {
+                aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {})
             },
-            changeNav: function (num) {
+            changeNav: function(num) {
                 this.nav = num;
             },
-            stop: function () {
+            stop: function() {
                 let checked = document.querySelectorAll('.active-list tbody input:checked')
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('data-gid')
@@ -169,7 +168,7 @@ aria2.open(function () {
                     })
                 }
             },
-            start: function () {
+            start: function() {
                 let checked = document.querySelectorAll('.pause-list tbody input:checked')
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('data-gid')
@@ -178,7 +177,7 @@ aria2.open(function () {
                     })
                 }
             },
-            del: function () {
+            del: function() {
                 let checked = document.querySelectorAll('.active-list tbody input:checked')
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('data-gid')
@@ -205,6 +204,7 @@ function formatFileName(value) {
         }
     }
 }
+
 function formatByte(value) {
     if (value > 1024 * 1024) {
         return (value / 1024 / 1024).toFixed(2) + 'MB'

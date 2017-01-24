@@ -1,67 +1,85 @@
-@font-face{
+@font-face {
     font-family: roboto;
     src: url('../font/Roboto-LightItalic.woff2');
 }
 
-html, button, input, select, textarea,
-    .pure-g [class *= "pure-u"] {
-        /* Set your content font stack here: */
-        font-family: roboto,'微软雅黑',Arial, Helvetica, sans-serif;
-    }
-.main{
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class *="pure-u"] {
+    /* Set your content font stack here: */
+    font-family: roboto, '微软雅黑', Arial, Helvetica, sans-serif;
+}
+
+.main {
     max-width: 1000px;
     margin: 0 auto;
 }
-.table-list{
+
+.table-list {
     width: 100%;
-    border:none;
+    border: none;
 }
-.active-list,.pause-list{
+
+.active-list,
+.pause-list {
     display: block;
 }
-.active-list tbody,.pause-list tbody{
+
+.active-list tbody,
+.pause-list tbody {
     display: block;
 }
-.active-list tbody tr,.pause-list tbody tr{
+
+.active-list tbody tr,
+.pause-list tbody tr {
     display: block;
     width: 100%;
 }
-.todoPic a{
+
+.todoPic a {
     height: 1.5rem;
     margin-top: 0.5rem;
 }
-.todoPic a.add{
-    background:url('../img/add.svg') center center no-repeat;
+
+.todoPic a.add {
+    background: url('../img/add.svg') center center no-repeat;
     background-size: auto 1.2rem;
 }
-.todoPic a.stop{
+
+.todoPic a.stop {
     background: url('../img/stop.svg') center center no-repeat;
     background-size: auto 1.2rem;
 }
-.todoPic a.play{
+
+.todoPic a.play {
     background: url('../img/play.svg') center center no-repeat;
     background-size: auto 1.2rem;
 }
-.todoPic a.delete{
+
+.todoPic a.delete {
     background: url('../img/delete.svg') center center no-repeat;
     background-size: auto 1.2rem;
 }
 
-.todoPic a.add:hover{
-    background:url('../img/add_f.svg') center center no-repeat #076EAC;
-    background-size: auto 1.2rem;
-}
-.todoPic a.stop:hover{
-    background:url('../img/stop_f.svg') center center no-repeat #076EAC;
+.todoPic a.add:hover {
+    background: url('../img/add_f.svg') center center no-repeat #076EAC;
     background-size: auto 1.2rem;
 }
 
-.todoPic a.play:hover{
-    background:url('../img/play_f.svg') center center no-repeat #076EAC;
-    background-size: auto 1.2rem;
-}
-.todoPic a.delete:hover{
-    background:url('../img/delete_f.svg') center center no-repeat #076EAC;
+.todoPic a.stop:hover {
+    background: url('../img/stop_f.svg') center center no-repeat #076EAC;
     background-size: auto 1.2rem;
 }
 
+.todoPic a.play:hover {
+    background: url('../img/play_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
+}
+
+.todoPic a.delete:hover {
+    background: url('../img/delete_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
+}

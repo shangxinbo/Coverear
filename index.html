@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Hello World!</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="static/css/pure-min.css" />
-        <link rel="stylesheet" type="text/css" href="static/css/main.css" />
-        <script src="src/vue.min.js" /></script>
-        <script type="text/x-template" id="activeList">
-            <table v-show="nav==1" class="pure-table pure-table-horizontal table-list active-list">
-                <thead>
-                    <tr>
-                        <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
-                        <th width="5%">index</th>
-                        <th width="10%">gid</th>
-                        <th width="55%">file</th>
-                        <th width="10%">speed</th>
-                        <th width="15%">complete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(tr,index) in list" :style="tr.style">
-                        <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
-                        <td width="5%">{{index+1}}</td>
-                        <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                        <td width="55%">{{tr.files[0].path | fileName}}</td>
-                        <td width="10%">{{tr.downloadSpeed | speed}}</td>
-                        <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </script>
-        <script type="text/x-template" id="completeList">
-            <table v-show="nav==2" class="pure-table pure-table-horizontal table-list">
-                <thead>
-                    <tr>
-                        <th>index</th>
-                        <th>gid</th>
-                        <th>file</th>
-                        <th>size</th>
-                        <th>todo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(tr,index) in list">
-                        <td>{{index+1}}</td>
-                        <td>{{tr.gid}}</td>
-                        <td>{{tr.files[0].path}}</td>
-                        <td>{{tr.totalLength}}</td>
-                        <td @click="del(tr.gid)">删除</td>
-                    </tr>
-                </tbody>
-            </table>
-        </script>
-        <script type="text/x-template" id="pauseList">
-            <table v-show="nav==3" class="pure-table pure-table-horizontal table-list pause-list">
-                <thead>
-                    <tr>
-                        <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
-                        <th width="10%">index</th>
-                        <th width="10%">gid</th>
-                        <th width="60%">file</th>
-                        <th width="15%">complete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(tr,index) in list" :style="tr.style">
-                        <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
-                        <td width="10%">{{index+1}}</td>
-                        <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                        <td width="60%">{{tr.files[0].path | fileName}}</td>
-                        <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </script>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/pure-min.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+    <script src="src/vue.min.js" /></script>
+    <script type="text/x-template" id="activeList">
+        <table v-show="nav==1" class="pure-table pure-table-horizontal table-list active-list">
+            <thead>
+                <tr>
+                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
+                    <th width="5%">index</th>
+                    <th width="10%">gid</th>
+                    <th width="55%">file</th>
+                    <th width="10%">speed</th>
+                    <th width="15%">complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(tr,index) in list" :style="tr.style">
+                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
+                    <td width="5%">{{index+1}}</td>
+                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
+                    <td width="55%">{{tr.files[0].path | fileName}}</td>
+                    <td width="10%">{{tr.downloadSpeed | speed}}</td>
+                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script type="text/x-template" id="completeList">
+        <table v-show="nav==2" class="pure-table pure-table-horizontal table-list">
+            <thead>
+                <tr>
+                    <th>index</th>
+                    <th>gid</th>
+                    <th>file</th>
+                    <th>size</th>
+                    <th>todo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(tr,index) in list">
+                    <td>{{index+1}}</td>
+                    <td>{{tr.gid}}</td>
+                    <td>{{tr.files[0].path}}</td>
+                    <td>{{tr.totalLength}}</td>
+                    <td @click="del(tr.gid)">删除</td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+    <script type="text/x-template" id="pauseList">
+        <table v-show="nav==3" class="pure-table pure-table-horizontal table-list pause-list">
+            <thead>
+                <tr>
+                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
+                    <th width="10%">index</th>
+                    <th width="10%">gid</th>
+                    <th width="60%">file</th>
+                    <th width="15%">complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(tr,index) in list" :style="tr.style">
+                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
+                    <td width="10%">{{index+1}}</td>
+                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
+                    <td width="60%">{{tr.files[0].path | fileName}}</td>
+                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
 </head>
 
 <body class="pure-g">
@@ -106,8 +106,8 @@
     </div>
 </body>
 <script>
-        // You can also require other files to run in this process
-        require('./renderer.js')
-    </script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+</script>
 
 </html>
