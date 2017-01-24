@@ -1,28 +1,28 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "electron": "^1.4.1"
-  },
-  "dependencies": {
-    "aria2": "^3.0.0",
-    "node-fetch": "^1.6.3",
-    "polygoat": "^1.1.4",
-    "ws": "^1.1.1"
-  }
+    "name": "Coverear",
+    "version": "1.0.0",
+    "description": "A simple Aria2 GUI client powered by electron",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/shangxinbo/Coverear",
+    "keywords": [
+        "Electron",
+        "quick",
+        "start",
+        "tutorial",
+        "demo"
+    ],
+    "author": "shangxinbo",
+    "license": "GPL-3.0",
+    "devDependencies": {
+        "electron": "^1.4.1"
+    },
+    "dependencies": {
+        "aria2": "^3.0.0",
+        "node-fetch": "^1.6.3",
+        "polygoat": "^1.1.4",
+        "ws": "^1.1.1"
+    }
 }
