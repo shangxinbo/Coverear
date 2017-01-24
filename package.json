@@ -1,12 +1,12 @@
 {
-    "name": "Coverear",
+    "name": "coverear",
     "version": "1.0.0",
     "description": "A simple Aria2 GUI client powered by electron",
     "main": "main.js",
     "scripts": {
         "start": "electron ."
     },
-    "repository": "https://github.com/shangxinbo/Coverear",
+    "repository": "https://github.com/shangxinbo/coverear",
     "keywords": [
         "Electron",
         "quick",
