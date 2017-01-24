@@ -20,7 +20,7 @@ exports.startJsonRPC = (callback) => {
         ], (error, stdout, stderr) => {
             if (callback) callback(error)
         })
-        callback();
+        callback()
     } else {
         if (callback) callback('os is not support')
     }
