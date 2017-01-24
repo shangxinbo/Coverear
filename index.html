@@ -20,7 +20,7 @@
                     <th width="15%">complete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="list.length>0">
                 <tr v-for="(tr,index) in list" :style="tr.style">
                     <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
                     <td width="5%">{{index+1}}</td>
@@ -30,26 +30,36 @@
                     <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
                 </tr>
             </tbody>
+            <tbody v-else="list.length<=0">
+                <tr>
+                    <td class="null">没有正在下载的文件</td>
+                </tr>
+            </tbody>
         </table>
     </script>
     <script type="text/x-template" id="completeList">
         <table v-show="nav==2" class="pure-table pure-table-horizontal table-list">
             <thead>
                 <tr>
-                    <th>index</th>
-                    <th>gid</th>
-                    <th>file</th>
-                    <th>size</th>
-                    <th>todo</th>
+                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
+                    <th width="10%">index</th>
+                    <th width="10%">gid</th>
+                    <th width="70%">file</th>
+                    <th width="15%">complete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="list.length>0">
                 <tr v-for="(tr,index) in list">
-                    <td>{{index+1}}</td>
-                    <td>{{tr.gid}}</td>
-                    <td>{{tr.files[0].path}}</td>
-                    <td>{{tr.totalLength}}</td>
-                    <td @click="del(tr.gid)">删除</td>
+                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
+                    <td width="10%">{{index+1}}</td>
+                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
+                    <td width="70%">{{tr.files[0].path | fileName}}</td>
+                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
+                </tr>
+            </tbody>
+            <tbody v-else="list.length<=0">
+                <tr>
+                    <td class="null">没有下载完成的文件</td>
                 </tr>
             </tbody>
         </table>
@@ -61,33 +71,55 @@
                     <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
                     <th width="10%">index</th>
                     <th width="10%">gid</th>
-                    <th width="60%">file</th>
+                    <th width="70%">file</th>
                     <th width="15%">complete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="list.length>0">
                 <tr v-for="(tr,index) in list" :style="tr.style">
                     <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
                     <td width="10%">{{index+1}}</td>
                     <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                    <td width="60%">{{tr.files[0].path | fileName}}</td>
+                    <td width="70%">{{tr.files[0].path | fileName}}</td>
                     <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
+                </tr>
+            </tbody>
+            <tbody v-else="list.length<=0">
+                <tr>
+                    <td class="null">没有暂停的文件</td>
                 </tr>
             </tbody>
         </table>
     </script>
+    <script type="text/x-template" id="chooseType">
+        <div class="dialog" v-show="show">
+            <div class="close-dialog" @click="close"></div>
+            <div class="pure-g choose-type" v-show="step==1">
+                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="goStep(2)">通过URl下载</a>
+                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="goStep(3)">通过.torrent文件下载</a>
+            </div>
+            <div class="pure-g choose-type" v-show="step==2">
+                <textarea rows="7" v-model="link" placeholder="http,https,ftp,sftp,magnet协议连接"></textarea>
+                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromLink">开始下载</a>
+            </div>
+            <div class="pure-g choose-type" v-show="step==3">
+                <input type="file" accept=".torrent,.matelink" v-model="file">
+                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromFile">开始下载</a>
+            </div>
+        </div>
+    </script>
 </head>
 
 <body class="pure-g">
-    <div id="tabNav" class="pure-u-1-1 main">
-        <h2></h2>
+    <div id="app" class="pure-u-1-1 main">
+        <!--<h2></h2>-->
         <div class="pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list pure-u-4-5">
                 <li class="pure-menu-item" :class="{'pure-menu-selected':nav==1}" @click="changeNav(1)">
                     <a href="#" class="pure-menu-link">正在下载</a>
                 </li>
                 <li class="pure-menu-item" :class="{'pure-menu-selected':nav==2}" @click="changeNav(2)">
-                    <a href="#" class="pure-menu-link">已下载</a>
+                    <a href="#" class="pure-menu-link">已下载/已删除</a>
                 </li>
                 <li class="pure-menu-item" :class="{'pure-menu-selected':nav==3}" @click="changeNav(3)">
                     <a href="#" class="pure-menu-link">已暂停</a>
@@ -95,14 +127,15 @@
             </ul>
             <div class="pure-u-1-5 pure-g todoPic">
                 <a class="pure-u-1-6 add" @click="addUri" href="javascript:void(0)" title="添加资源"></a>
-                <a class="pure-u-1-6 stop" @click="stop" href="javascript:void(0)" title="停止"></a>
-                <a class="pure-u-1-6 play" @click="start" href="javascript:void(0)" title="开始"></a>
+                <a v-show="nav==1" class="pure-u-1-6 stop" @click="stop" href="javascript:void(0)" title="停止"></a>
+                <a v-show="nav==3" class="pure-u-1-6 play" @click="start" href="javascript:void(0)" title="开始"></a>
                 <a class="pure-u-1-6 delete" @click="del" href="javascript:void(0)" title="删除"></a>
             </div>
         </div>
         <active-list :nav="nav"></active-list>
         <complete-list :nav="nav"></complete-list>
         <pause-list :nav="nav"></pause-list>
+        <choose-type></choose-type>
     </div>
 </body>
 <script>

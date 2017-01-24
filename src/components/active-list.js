@@ -38,7 +38,7 @@ exports.create = function(aria2) {
         },
         mounted: function() {
             let _this = this
-            setInterval(() => {
+            let upList = () => {
                 aria2.send('tellActive').then(function(m) {
                     _this.list = m
                     for (let i = 0; i < _this.list.length; i++) {
@@ -47,7 +47,9 @@ exports.create = function(aria2) {
                         _this.list[i].style = 'background: linear-gradient(to right,#ABF2F2 ' + percent + '%, #fff ' + percent + '%)'
                     }
                 })
-            }, 2000)
+            }
+            upList()
+            setInterval(upList, 2000)
         }
     })
 }

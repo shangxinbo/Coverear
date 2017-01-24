@@ -30,3 +30,15 @@ Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT ro
 2017-01-22 21:45:46.943279 [ERROR] [AbstractCommand.cc:351] CUID#14 - Download aborted. URI=https://download.jetbrains.com/webstorm/WebStorm-2016.3.2.exe
 Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://download.jetbrains.8686c.com/webstorm/WebStorm-2016.3.2.exe
   -> [DownloadCommand.cc:312] errorCode=5 Too slow Downloading speed: 9446 <= 10240(B/s), host:download.jetbrains.8686c.com
+2017-01-24 14:28:31.788389 [ERROR] [AbstractCommand.cc:351] CUID#27 - Download aborted. URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+  -> [DownloadCommand.cc:312] errorCode=5 Too slow Downloading speed: 9176 <= 10240(B/s), host:noto-website-2.storage.googleapis.com
+2017-01-24 14:28:37.404278 [ERROR] [AbstractCommand.cc:351] CUID#25 - Download aborted. URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+  -> [DownloadCommand.cc:312] errorCode=5 Too slow Downloading speed: 9798 <= 10240(B/s), host:noto-website-2.storage.googleapis.com
+2017-01-24 16:39:44.108983 [ERROR] [download_helper.cc:423] Unrecognized URI or unsupported protocol: asdf
+2017-01-24 16:40:44.684614 [ERROR] [download_helper.cc:423] Unrecognized URI or unsupported protocol: zsd
+2017-01-24 16:46:43.061056 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-24 17:00:38.738369 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat

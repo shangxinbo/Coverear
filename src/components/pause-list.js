@@ -37,19 +37,22 @@ exports.create = function(aria2) {
             }
         },
         mounted: function() {
-            let _this = this
-            setInterval(() => {
+            const _this = this
+            const upList = () => {
                 aria2.send('tellWaiting', 0, 10).then(m => {
                     _this.list = m
                     for (let i = 0; i < _this.list.length; i++) {
                         let vs = _this.list[i]
+                            //aria2.send('unpause', vs.gid).then(m => { aria2.send('pause', vs.gid).then(m => { console.log(123) }) })
                         percent = (vs['completedLength'] / vs['totalLength']).toFixed(3) * 100
                         _this.list[i].style = 'background: linear-gradient(to right,#ABF2F2 ' + percent + '%, #fff ' + percent + '%)'
                     }
                 }, err => {
                     console.log(err)
                 })
-            }, 2000)
+            }
+            upList()
+            setInterval(upList, 2000)
         }
     })
 }

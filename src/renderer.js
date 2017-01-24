@@ -6,6 +6,7 @@ const Aria2 = require('aria2')
 const activeList = require('./components/active-list')
 const completeList = require('./components/complete-list')
 const pauseList = require('./components/pause-list')
+const chooseType = require('./components/choose-type')
 
 let options = {
     host: 'localhost',
@@ -26,9 +27,10 @@ aria2.open(function() {
     activeList.create(aria2)
     completeList.create(aria2)
     pauseList.create(aria2)
+    let typeBus = chooseType.showType(aria2)
 
     new Vue({
-        el: '#tabNav',
+        el: '#app',
         data: function() {
             return {
                 nav: 1
@@ -36,10 +38,12 @@ aria2.open(function() {
         },
         methods: { // 不能用箭头函数
             addUri: function(url) {
-                aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {})
+                typeBus.$emit('showDialog')
+                    //dialogType.$data.show = true
+                    //aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {})
             },
             changeNav: function(num) {
-                this.nav = num;
+                this.nav = num
             },
             stop: function() {
                 let checked = document.querySelectorAll('.active-list tbody input:checked')
@@ -60,7 +64,7 @@ aria2.open(function() {
                 }
             },
             del: function() {
-                let checked = document.querySelectorAll('.active-list tbody input:checked')
+                let checked = document.querySelectorAll('.table-list tbody input:checked')
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('data-gid')
                     aria2.remove(gid).then('', err => {
