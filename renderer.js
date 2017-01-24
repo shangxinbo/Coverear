@@ -43,6 +43,21 @@ aria2.open(function () {
             },
             byte: formatByte
         },
+        methods: {
+            checkAllToggle: (evt) => {
+                let checked = evt.target.checked
+                let listCheckbox = document.querySelectorAll('.active-list tbody input[type="checkbox"]')
+                for (let i = 0; i < listCheckbox.length; i++) {
+                    listCheckbox[i].checked = checked;
+                }
+            },
+            changeAllStatus: (evt) => {
+                let checked = evt.target.checked
+                if (!checked) {
+                    document.querySelector('.active-list thead input[type="checkbox"]').checked = false;
+                }
+            }
+        },
         mounted: function () {
             let _this = this
             setInterval(() => {
@@ -78,6 +93,58 @@ aria2.open(function () {
         }
     })
 
+    Vue.component('pause-list', {
+        template: '#pauseList',
+        props: ['nav'],
+        data: function () {
+            return {
+                list: []
+            }
+        },
+        filters: {
+            fileName: formatFileName,
+            speed: function (value) {
+                if (value > 1024 * 1024) {
+                    return (value / 1024 / 1024).toFixed(2) + 'MB/s'
+                } else {
+                    return (value / 1024).toFixed(2) + 'KB/s'
+                }
+            },
+            byte: formatByte
+        },
+        methods: {
+            checkAllToggle: (evt) => {
+                let checked = evt.target.checked
+                let listCheckbox = document.querySelectorAll('.active-list tbody input[type="checkbox"]')
+                for (let i = 0; i < listCheckbox.length; i++) {
+                    listCheckbox[i].checked = checked;
+                }
+            },
+            changeAllStatus: (evt) => {
+                let checked = evt.target.checked
+                if (!checked) {
+                    document.querySelector('.active-list thead input[type="checkbox"]').checked = false;
+                }
+            }
+        },
+        mounted: function () {
+            let _this = this
+            setInterval(() => {
+                aria2.send('tellWaiting', 0, 10).then(m => {
+                    _this.list = m
+                    for (let i = 0; i < _this.list.length; i++) {
+                        let vs = _this.list[i]
+                        percent = (vs['completedLength'] / vs['totalLength']).toFixed(3) * 100
+                        _this.list[i].style = 'background: linear-gradient(to right,#ABF2F2 ' + percent + '%, #fff ' + percent + '%)'
+                    }
+                }, err => {
+                    console.log(err)
+                })
+            }, 2000)
+        }
+    })
+
+
     let dobtn = new Vue({
         el: '#tabNav',
         data: function () {
@@ -85,13 +152,40 @@ aria2.open(function () {
                 nav: 1
             }
         },
-        methods: {
+        methods: {    // 不能用箭头函数
             addUri: function (url) {
                 aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {
                 })
             },
             changeNav: function (num) {
                 this.nav = num;
+            },
+            stop: function () {
+                let checked = document.querySelectorAll('.active-list tbody input:checked')
+                for (let i = 0; i < checked.length; i++) {
+                    let gid = checked[i].getAttribute('data-gid')
+                    aria2.pause(gid).then('', err => {
+                        console.log(err) //TODO: 报错提示
+                    })
+                }
+            },
+            start: function () {
+                let checked = document.querySelectorAll('.pause-list tbody input:checked')
+                for (let i = 0; i < checked.length; i++) {
+                    let gid = checked[i].getAttribute('data-gid')
+                    aria2.unpause(gid).then('', err => {
+                        console.log(err) //TODO: 报错提示
+                    })
+                }
+            },
+            del: function () {
+                let checked = document.querySelectorAll('.active-list tbody input:checked')
+                for (let i = 0; i < checked.length; i++) {
+                    let gid = checked[i].getAttribute('data-gid')
+                    aria2.remove(gid).then('', err => {
+                        console.log(err) //TODO: 报错提示
+                    })
+                }
             }
         }
     })

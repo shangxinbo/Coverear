@@ -11,33 +11,21 @@
         <script type="text/x-template" id="activeList">
             <table v-show="nav==1" class="pure-table pure-table-horizontal table-list active-list">
                 <thead>
-                    <tr >
+                    <tr>
+                        <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
                         <th width="5%">index</th>
                         <th width="10%">gid</th>
-                        <th width="60%">file</th>
+                        <th width="55%">file</th>
                         <th width="10%">speed</th>
                         <th width="15%">complete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td width="5%">index</td>
-                        <td width="10%">gid</td>
-                        <td width="60%">file</td>
-                        <td width="10%">size</td>
-                        <td width="15%">todo</td>
-                    </tr>
-                    <tr>
-                        <td width="5%">index</td>
-                        <td width="10%">gid</td>
-                        <td width="60%">file</td>
-                        <td width="10%">size</td>
-                        <td width="15%">todo</td>
-                    </tr>
                     <tr v-for="(tr,index) in list" :style="tr.style">
+                        <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
                         <td width="5%">{{index+1}}</td>
                         <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                        <td width="60%">{{tr.files[0].path | fileName}}</td>
+                        <td width="55%">{{tr.files[0].path | fileName}}</td>
                         <td width="10%">{{tr.downloadSpeed | speed}}</td>
                         <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
                     </tr>
@@ -67,61 +55,59 @@
             </table>
         </script>
         <script type="text/x-template" id="pauseList">
-            <table class="pure-table pure-table-horizontal table-list">
+            <table v-show="nav==3" class="pure-table pure-table-horizontal table-list pause-list">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Year</th>
+                        <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
+                        <th width="10%">index</th>
+                        <th width="10%">gid</th>
+                        <th width="60%">file</th>
+                        <th width="15%">complete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Honda</td>
-                        <td>Accord</td>
-                        <td>2009</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Toyota</td>
-                        <td>Camry</td>
-                        <td>2012</td>
+                    <tr v-for="(tr,index) in list" :style="tr.style">
+                        <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
+                        <td width="10%">{{index+1}}</td>
+                        <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
+                        <td width="60%">{{tr.files[0].path | fileName}}</td>
+                        <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
                     </tr>
                 </tbody>
             </table>
         </script>
-    </head>
-    <body class="pure-g">
-        <div id="tabNav" class="pure-u-1-1 main">
-            <h2></h2>
-            <div class="pure-menu pure-menu-horizontal">
-                <ul class="pure-menu-list pure-u-4-5">
-                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==1}" @click="changeNav(1)">
-                        <a href="#" class="pure-menu-link">正在下载</a>
-                    </li>
-                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==2}" @click="changeNav(2)">
-                        <a href="#" class="pure-menu-link">已下载</a>
-                    </li>
-                    <li class="pure-menu-item" :class="{'pure-menu-selected':nav==3}" @click="changeNav(3)">
-                        <a href="#" class="pure-menu-link">下载失败</a>
-                    </li>
-                </ul>
-                <div class="pure-u-1-5 pure-g todoPic">
-                    <a class="pure-u-1-12 add" @click="addUri" title="添加资源"></a>
-                    <a class="pure-u-1-12 stop" @click="addUri" title="停止"></a>
-                    <a class="pure-u-1-12 play" @click="addUri" title="开始"></a>
-                    <a class="pure-u-1-12 delete" @click="addUri" title="删除"></a>
-                </div>
+</head>
+
+<body class="pure-g">
+    <div id="tabNav" class="pure-u-1-1 main">
+        <h2></h2>
+        <div class="pure-menu pure-menu-horizontal">
+            <ul class="pure-menu-list pure-u-4-5">
+                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==1}" @click="changeNav(1)">
+                    <a href="#" class="pure-menu-link">正在下载</a>
+                </li>
+                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==2}" @click="changeNav(2)">
+                    <a href="#" class="pure-menu-link">已下载</a>
+                </li>
+                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==3}" @click="changeNav(3)">
+                    <a href="#" class="pure-menu-link">已暂停</a>
+                </li>
+            </ul>
+            <div class="pure-u-1-5 pure-g todoPic">
+                <a class="pure-u-1-6 add" @click="addUri" href="javascript:void(0)" title="添加资源"></a>
+                <a class="pure-u-1-6 stop" @click="stop" href="javascript:void(0)" title="停止"></a>
+                <a class="pure-u-1-6 play" @click="start" href="javascript:void(0)" title="开始"></a>
+                <a class="pure-u-1-6 delete" @click="del" href="javascript:void(0)" title="删除"></a>
             </div>
-            <active-list :nav="nav"></active-list>
-            <complete-list :nav="nav"></active-list>
-            <pause-list :nav="nav"></active-list>
         </div>
-    </body>
-    <script>
+        <active-list :nav="nav"></active-list>
+        <complete-list :nav="nav"></complete-list>
+        <pause-list :nav="nav"></pause-list>
+    </div>
+</body>
+<script>
         // You can also require other files to run in this process
         require('./renderer.js')
     </script>
+
 </html>

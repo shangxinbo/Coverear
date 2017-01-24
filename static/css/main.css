@@ -16,50 +16,52 @@ html, button, input, select, textarea,
     width: 100%;
     border:none;
 }
-.active-list{
+.active-list,.pause-list{
     display: block;
 }
-.active-list tbody{
+.active-list tbody,.pause-list tbody{
     display: block;
 }
-.active-list tbody tr{
+.active-list tbody tr,.pause-list tbody tr{
     display: block;
     width: 100%;
 }
 .todoPic a{
-    height: 2rem;
+    height: 1.5rem;
+    margin-top: 0.5rem;
 }
 .todoPic a.add{
-    background:url('../img/add.svg');
+    background:url('../img/add.svg') center center no-repeat;
+    background-size: auto 1.2rem;
 }
 .todoPic a.stop{
-    background: url('../img/stop.svg') ;
+    background: url('../img/stop.svg') center center no-repeat;
+    background-size: auto 1.2rem;
 }
 .todoPic a.play{
-    background: url('../img/play.svg');
+    background: url('../img/play.svg') center center no-repeat;
+    background-size: auto 1.2rem;
 }
 .todoPic a.delete{
-    background: url('../img/delete.svg');
+    background: url('../img/delete.svg') center center no-repeat;
+    background-size: auto 1.2rem;
 }
 
 .todoPic a.add:hover{
-    background: '../img/add.svg';
-    background: #ccc;
+    background:url('../img/add_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
 }
 .todoPic a.stop:hover{
-    background: '../img/stop.svg';
-    background: #ccc;
+    background:url('../img/stop_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
 }
 
 .todoPic a.play:hover{
-    background: '../img/play.svg';
-    background: #ccc;
+    background:url('../img/play_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
 }
 .todoPic a.delete:hover{
-    background: '../img/delete.svg';
-    background: #ccc;
+    background:url('../img/delete_f.svg') center center no-repeat #076EAC;
+    background-size: auto 1.2rem;
 }
-
-
-
 
