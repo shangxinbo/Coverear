@@ -103,7 +103,7 @@
                 <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromLink">开始下载</a>
             </div>
             <div class="pure-g choose-type" v-show="step==3">
-                <input type="file" accept=".torrent,.matelink" v-model="file">
+                <input type="file" accept=".torrent,.matelink" @change="changeFile">
                 <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromFile">开始下载</a>
             </div>
         </div>

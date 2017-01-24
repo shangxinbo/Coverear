@@ -42,3 +42,9 @@ Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://noto-website-2.stora
 Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
 2017-01-24 17:00:38.738369 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
 Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-24 17:52:45.996387 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-24 18:20:13.701724 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+2017-01-24 18:35:27.996180 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat

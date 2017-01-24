@@ -1,3 +1,6 @@
+const fs = require('fs')
+
+
 exports.showType = function(aria2) {
     let bus = new Vue()
     let type = Vue.component('choose-type', {
@@ -20,6 +23,9 @@ exports.showType = function(aria2) {
             goStep: function(num) {
                 this.step = num
             },
+            changeFile: function(evt) {
+                this.file = evt.target.files[0].path
+            },
             startFromLink: function() {
                 const _this = this
                 if (this.link) {
@@ -34,11 +40,13 @@ exports.showType = function(aria2) {
             startFromFile: function() {
                 const _this = this
                 if (this.file) {
-                    aria2.send('addUri', [this.file]).then(m => {
-                        this.show = false
-                        this.link = ''
-                    }, err => {
-                        console.log(err) //TODO: url error
+                    fs.readFile(_this.file, 'base64', function(err, data) {
+                        aria2.send('addTorrent', data).then(m => {
+                            _this.show = false
+                            _this.file = ''
+                        }, err => {
+                            console.log(err) //TODO: url error
+                        })
                     })
                 }
             }
