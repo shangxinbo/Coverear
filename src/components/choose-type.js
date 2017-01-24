@@ -1,6 +1,5 @@
 const fs = require('fs')
 
-
 exports.showType = function(aria2) {
     let bus = new Vue()
     let type = Vue.component('choose-type', {
