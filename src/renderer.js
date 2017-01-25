@@ -19,7 +19,7 @@ let options = {
 let aria2 = new Aria2([options])
 
 aria2.onmessage = function(m) {
-    //console.log('aria2 IN', m);
+    //console.log('aria2 IN', JSON.parse(JSON.stringify(m)))
 }
 
 // open WebSocket

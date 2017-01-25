@@ -41,6 +41,7 @@ exports.create = function(aria2) {
             let upList = () => {
                 aria2.send('tellActive').then(function(m) {
                     _this.list = m
+                        //console.log(JSON.parse(JSON.stringify(m)))
                     for (let i = 0; i < _this.list.length; i++) {
                         let vs = _this.list[i]
                         percent = (vs['completedLength'] / vs['totalLength']).toFixed(3) * 100

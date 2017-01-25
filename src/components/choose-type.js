@@ -27,8 +27,13 @@ exports.showType = function(aria2) {
             },
             startFromLink: function() {
                 const _this = this
+                let source = _this.link
                 if (this.link) {
-                    aria2.send('addUri', [this.link]).then(m => {
+                    if (this.link.indexOf('thunder://') >= 0) {
+                        let decodeUrl = new Buffer(this.link.replace('thunder://', ''), 'base64').toString()
+                        source = decodeUrl.substr(2, decodeUrl.length - 4)
+                    }
+                    aria2.send('addUri', [source]).then(m => {
                         this.show = false
                         this.link = ''
                     }, err => {
