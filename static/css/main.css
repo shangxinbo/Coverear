@@ -3,6 +3,8 @@
     src: url('../font/Roboto-LightItalic.woff2');
 }
 
+html{overflow-x:hidden }
+
 html,
 button,
 input,
