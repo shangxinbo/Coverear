@@ -1,9 +1,9 @@
 const fs = require('fs')
 
-exports.showType = function(aria2) {
+exports.dialog = function(aria2) {
     let bus = new Vue()
-    let type = Vue.component('choose-type', {
-        template: '#chooseType',
+    let type = Vue.component('add-source', {
+        template: '#addSource',
         data: function() {
             return {
                 show: false,

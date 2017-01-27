@@ -1,144 +1,114 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>coverear</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="static/css/pure-min.css" />
     <link rel="stylesheet" type="text/css" href="static/css/main.css" />
     <script src="src/lib/vue.min.js" /></script>
     <script type="text/x-template" id="activeList">
-        <table v-show="nav==1" class="pure-table pure-table-horizontal table-list active-list">
-            <thead>
-                <tr>
-                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
-                    <th width="5%">index</th>
-                    <th width="10%">gid</th>
-                    <th width="55%">file</th>
-                    <th width="10%">speed</th>
-                    <th width="15%">complete</th>
-                </tr>
-            </thead>
-            <tbody v-if="list.length>0">
-                <tr v-for="(tr,index) in list" :style="tr.style">
-                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
-                    <td width="5%">{{index+1}}</td>
-                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                    <td width="55%">{{tr.files[0].path | fileName}}</td>
-                    <td width="10%">{{tr.downloadSpeed | speed}}</td>
-                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
-                </tr>
-            </tbody>
-            <tbody v-else="list.length<=0">
-                <tr>
-                    <td class="null">没有正在下载的文件</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul class="list-body active-list">
+            <li v-for="(tr,index) in list" :style="tr.style">
+                <div class="select">
+                    <input :id="tr.gid" type="checkbox" />
+                    <label :for="tr.gid"></label>
+                </div>
+                <div class="info">
+                    <div>{{tr.files[0].path | fileName}}</div>
+                    <div class="label">
+                        <span class="progress">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</span>
+                        <span class="blue-text">{{tr.downloadSpeed | speed}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </script>
     <script type="text/x-template" id="completeList">
-        <table v-show="nav==2" class="pure-table pure-table-horizontal table-list">
-            <thead>
-                <tr>
-                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
-                    <th width="10%">index</th>
-                    <th width="10%">gid</th>
-                    <th width="70%">file</th>
-                    <th width="15%">complete</th>
-                </tr>
-            </thead>
-            <tbody v-if="list.length>0">
-                <tr v-for="(tr,index) in list">
-                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
-                    <td width="10%">{{index+1}}</td>
-                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                    <td width="70%">{{tr.files[0].path | fileName}}</td>
-                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
-                </tr>
-            </tbody>
-            <tbody v-else="list.length<=0">
-                <tr>
-                    <td class="null">没有下载完成的文件</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul class="list-body complete-list">
+            <li v-for="(tr,index) in list" :style="tr.style" :gid="tr.gid">
+                <div class="select">
+                    <input :id="tr.gid" type="checkbox" />
+                    <label :for="tr.gid"></label>
+                </div>
+                <div class="info">
+                    <div>{{tr.files[0].path | fileName}}</div>
+                    <div class="label">
+                        <span>{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</span>
+                        <span>{{tr.downloadSpeed | speed}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </script>
     <script type="text/x-template" id="pauseList">
-        <table v-show="nav==3" class="pure-table pure-table-horizontal table-list pause-list">
-            <thead>
-                <tr>
-                    <th width="5%"><input type="checkbox" @change="checkAllToggle" /></th>
-                    <th width="10%">index</th>
-                    <th width="10%">gid</th>
-                    <th width="70%">file</th>
-                    <th width="15%">complete</th>
-                </tr>
-            </thead>
-            <tbody v-if="list.length>0">
-                <tr v-for="(tr,index) in list" :style="tr.style">
-                    <td width="5%"><input :data-gid="tr.gid" type="checkbox" @change="changeAllStatus" /></td>
-                    <td width="10%">{{index+1}}</td>
-                    <td width="10%" :title="tr.gid">{{tr.gid.substr(0,4)}}</td>
-                    <td width="70%">{{tr.files[0].path | fileName}}</td>
-                    <td width="15%">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</td>
-                </tr>
-            </tbody>
-            <tbody v-else="list.length<=0">
-                <tr>
-                    <td class="null">没有暂停的文件</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul class="list-body pause-list">
+            <li v-for="(tr,index) in list" :style="tr.style" :gid="tr.gid">
+                <div class="select">
+                    <input :id="tr.gid" type="checkbox" />
+                    <label :for="tr.gid"></label>
+                </div>
+                <div class="info">
+                    <div>{{tr.files[0].path | fileName}}</div>
+                    <div class="label">
+                        <span class="progress">{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</span>
+                        <span class="blue-text">{{tr.downloadSpeed | speed}}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </script>
-    <script type="text/x-template" id="chooseType">
+    <script type="text/x-template" id="addSource">
         <div class="dialog" v-show="show">
             <div class="close-dialog" @click="close"></div>
-            <div class="pure-g choose-type" v-show="step==1">
-                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="goStep(2)">通过URl下载</a>
-                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="goStep(3)">通过.torrent文件下载</a>
+            <div class="choose-type" v-show="step==1">
+                <a class="button-large" @click="goStep(2)">通过URl下载</a>
+                <a class="button-large" @click="goStep(3)">通过.torrent文件下载</a>
             </div>
-            <div class="pure-g choose-type" v-show="step==2">
+            <div class="choose-type" v-show="step==2">
                 <textarea rows="7" v-model="link" placeholder="http,https,ftp,sftp,magnet协议连接"></textarea>
-                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromLink">开始下载</a>
+                <a class="button-large" @click="startFromLink">开始下载</a>
             </div>
-            <div class="pure-g choose-type" v-show="step==3">
-                <input type="file" accept=".torrent,.matelink" @change="changeFile">
-                <a class="pure-u-1-1 pure-button pure-button-primary button-large" @click="startFromFile">开始下载</a>
+            <div class="choose-type" v-show="step==3">
+                <a class="button-large get-file" @click="startFromFile">
+                    选择文件
+                    <input type="file" accept=".torrent,.matelink" @change="changeFile" />
+                </a>
             </div>
         </div>
     </script>
 </head>
 
-<body class="pure-g">
-    <div id="app" class="pure-u-1-1 main">
-        <!--<h2></h2>-->
-        <div class="pure-menu pure-menu-horizontal">
-            <ul class="pure-menu-list pure-u-4-5">
-                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==1}" @click="changeNav(1)">
-                    <a href="#" class="pure-menu-link">正在下载</a>
-                </li>
-                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==2}" @click="changeNav(2)">
-                    <a href="#" class="pure-menu-link">已下载/已删除</a>
-                </li>
-                <li class="pure-menu-item" :class="{'pure-menu-selected':nav==3}" @click="changeNav(3)">
-                    <a href="#" class="pure-menu-link">已暂停</a>
-                </li>
-            </ul>
-            <div class="pure-u-1-5 pure-g todoPic">
-                <a class="pure-u-1-6 add" @click="addUri" href="javascript:void(0)" title="添加资源"></a>
-                <a v-show="nav==1" class="pure-u-1-6 stop" @click="stop" href="javascript:void(0)" title="停止"></a>
-                <a v-show="nav==3" class="pure-u-1-6 play" @click="start" href="javascript:void(0)" title="开始"></a>
-                <a class="pure-u-1-6 delete" @click="del" href="javascript:void(0)" title="删除"></a>
+<body>
+    <div id="app">
+        <div class="header">
+            <a class="col-3 add" @click="addUri" href="javascript:void(0)" title="添加资源"></a>
+            <a class="col-3 stop" @click="stop" v-show="nav==1" href="javascript:void(0)" title="停止"></a>
+            <a class="col-3 play" @click="start" v-show="nav==3" href="javascript:void(0)" title="开始"></a>
+            <a class="col-3 delete" @click="del" href="javascript:void(0)" title="删除"></a>
+            <a class="col-3 set" @click="set" href="javascript:void(0)" title="设置"></a>
+            </a>
+        </div>
+        <div class="list">
+            <div class="list-group" :class="{active:nav==1}">
+                <div class="list-type" @click="changeNav(1)">正在下载<span class="arrow">&nbsp;</span></div>
+                <active-list></active-list>
+            </div>
+            <div class="list-group" :class="{active:nav==2}">
+                <div class="list-type" @click="changeNav(2)">下载结束<span class="arrow">&nbsp;</span></div>
+                <complete-list></complete-list>
+            </div>
+            <div class="list-group" :class="{active:nav==3}">
+                <div class="list-type" @click="changeNav(3)">暂停下载<span class="arrow">&nbsp;</span></div>
+                <pause-list></pause-list>
             </div>
         </div>
-        <active-list :nav="nav"></active-list>
-        <complete-list :nav="nav"></complete-list>
-        <pause-list :nav="nav"></pause-list>
-        <choose-type></choose-type>
+        <add-source></add-source>
     </div>
 </body>
 <script>
     // You can also require other files to run in this process
     require('./src/renderer.js')
 </script>
+
 </html>
