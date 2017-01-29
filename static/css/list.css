@@ -1,0 +1,110 @@
+.list {
+    height: 32rem;
+}
+
+.list-type {
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding-left: 0.5rem;
+    color: white;
+    border-bottom: solid 1px #ccc;
+    background: #3eadff;
+    cursor: pointer;
+}
+
+.list-body {
+    display: none;
+}
+
+.active .list-body {
+    height: 24rem;
+    overflow-y: auto;
+    display: block;
+}
+
+.active .list-body li {
+    zoom: 1;
+    overflow: hidden;
+    padding: 0.5rem 0.3rem;
+    border-bottom: solid 1px #ccc;
+    display: flex;
+}
+
+
+/*checkbox*/
+
+.active .list-body li .select {
+    max-width: 2rem;
+    flex: 1;
+    float: left;
+    position: relative;
+}
+
+.active .list-body li .select input+label {
+    width: 48%;
+    margin-top: 10px;
+    margin-left: 5px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.active .list-body li .select input+label::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background: #EEE;
+    vertical-align: middle;
+    border-radius: 2px;
+    border: solid 1px #ccc;
+    box-sizing: border-box;
+    transition: background ease-in .1s
+}
+
+.active .list-body li .select input[type="checkbox"]:checked+label::before {
+    background-color: rgb(53, 183, 111);
+    border: 1px #ccc solid;
+}
+
+.active .list-body li .select input {
+    display: none;
+}
+
+.active .list-body li .info {
+    flex: 11;
+}
+
+.label {
+    color: #9c9c9c;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.progress {
+    float: right;
+    margin-right: 0.2rem;
+}
+
+.blue-text {
+    color: #20a0ff;
+}
+
+.arrow {
+    background: url('../img/more_unfold.svg') center center no-repeat;
+    background-size: 1.2rem;
+    width: 1.2rem;
+    margin-right: 1rem;
+    float: right;
+}
+
+.active .arrow {
+    transform: rotate(180deg);
+}
+
+.null {
+    display: block;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    color: #4c4c4c;
+}

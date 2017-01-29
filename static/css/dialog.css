@@ -1,0 +1,61 @@
+.dialog {
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.dialog .close-dialog {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: url('../img/close.svg') center center no-repeat;
+    background-size: 2rem;
+    cursor: pointer;
+}
+
+.choose-type {
+    margin-top: 5rem;
+    flex-direction: column;
+}
+
+.choose-type textarea {
+    width: 18rem;
+    display: block;
+    margin: 0 auto;
+}
+
+.button-large {
+    font-size: 120%;
+    margin-bottom: 10px;
+    width: 15rem;
+    height: 3rem;
+    line-height: 3rem;
+    background: #20a0ff;
+    border-radius: 2px;
+    display: block;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 0.2rem;
+    padding: 0px;
+}
+
+.get-file {
+    position: relative;
+}
+
+.get-file input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}

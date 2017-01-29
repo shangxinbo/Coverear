@@ -1,0 +1,110 @@
+.header {
+    display: flex;
+    height: 2.5rem;
+    box-shadow: 0 1px 1px 2px rgba(0, 0, 0, .1);
+}
+
+.header a {
+    display: block;
+    flex: 1;
+}
+
+.header a.add {
+    background: url('../img/add.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.adduri {
+    background: url('../img/link.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.addfile {
+    background: url('../img/copy.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.stop {
+    background: url('../img/stop.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.play {
+    background: url('../img/play.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.delete {
+    background: url('../img/delete.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.detail {
+    background: url('../img/pic.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.set {
+    background: url('../img/set.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.folder {
+    background: url('../img/folder.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.redown {
+    background: url('../img/refresh.svg') center center no-repeat;
+    background-size: auto 1.3rem;
+}
+
+.header a.add:hover {
+    background: url('../img/add_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.adduri:hover {
+    background: url('../img/link_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.addfile:hover {
+    background: url('../img/copy_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.stop:hover {
+    background: url('../img/stop_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.play:hover {
+    background: url('../img/play_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.delete:hover {
+    background: url('../img/delete_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.detail:hover {
+    background: url('../img/pic_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.set:hover {
+    background: url('../img/set_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.folder:hover {
+    background: url('../img/folder_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
+
+.header a.redown:hover {
+    background: url('../img/refresh_f.svg') center center no-repeat #f1f1f1;
+    background-size: auto 1.3rem;
+}
