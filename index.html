@@ -62,18 +62,13 @@
         <div class="dialog" v-show="show">
             <div class="close-dialog" @click="close"></div>
             <div class="choose-type" v-show="step==1">
-                <a class="button-large" @click="goStep(2)">通过URl下载</a>
-                <a class="button-large" @click="goStep(3)">通过.torrent文件下载</a>
+                <a class="button-large" @click="goStep(2)">新建URl下载</a>
+                <a class="button-large" @click="startFromFile">.torrent,.matelink文件</a>
+                <input type="file" accept=".torrent,.matelink" @change="changeFile" />
             </div>
             <div class="choose-type" v-show="step==2">
-                <textarea rows="7" v-model="link" placeholder="http,https,ftp,sftp,magnet协议连接"></textarea>
+                <textarea rows="7" v-model="link" placeholder="http|https|ftp|sftp|magnet support"></textarea>
                 <a class="button-large" @click="startFromLink">开始下载</a>
-            </div>
-            <div class="choose-type" v-show="step==3">
-                <a class="button-large get-file" @click="startFromFile">
-                    选择文件
-                    <input type="file" accept=".torrent,.matelink" @change="changeFile" />
-                </a>
             </div>
         </div>
     </script>

@@ -1,5 +1,5 @@
 .dialog {
-    background: white;
+    background: rgba(237, 237, 237, 0.65);
     position: absolute;
     top: 0;
     left: 0;
@@ -22,6 +22,7 @@
 .choose-type {
     margin-top: 5rem;
     flex-direction: column;
+    position: relative;
 }
 
 .choose-type textarea {
@@ -31,11 +32,9 @@
 }
 
 .button-large {
-    font-size: 120%;
-    margin-bottom: 10px;
-    width: 15rem;
-    height: 3rem;
-    line-height: 3rem;
+    width: 12rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
     background: #20a0ff;
     border-radius: 2px;
     display: block;
@@ -43,19 +42,17 @@
     text-align: center;
     cursor: pointer;
     margin: 0 auto;
-    margin-top: 0.2rem;
-    padding: 0px;
+    margin-top: 0.5rem;
 }
 
-.get-file {
-    position: relative;
-}
-
-.get-file input {
+.choose-type input[type="file"] {
     opacity: 0;
-    width: 100%;
-    height: 100%;
+    width: 12rem;
+    height: 2.5rem;
+    margin: 0 auto;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 50%;
+    margin-left: -6rem;
+    bottom: 0;
+    cursor: pointer;
 }
