@@ -1,5 +1,10 @@
 const fs = require('fs')
 
+function linkCheck(link) {
+    let reg = /^(http|ftp|https|sftp|magnet):\/\/([\s\S]*)$/
+    return reg.test(link)
+}
+
 exports.dialog = function(aria2) {
     let bus = new Vue()
     let type = Vue.component('add-source', {
@@ -27,15 +32,11 @@ exports.dialog = function(aria2) {
             },
             startFromLink: function() {
                 const _this = this
-                let source = _this.link
-                if (this.link) {
-                    if (this.link.indexOf('thunder://') >= 0) {
-                        let decodeUrl = new Buffer(this.link.replace('thunder://', ''), 'base64').toString()
-                        source = decodeUrl.substr(2, decodeUrl.length - 4)
-                    }
+                let source = _this.link.trim()
+                if (linkCheck(source)) {
                     aria2.send('addUri', [source]).then(m => {
-                        this.show = false
-                        this.link = ''
+                        _this.show = false
+                        _this.link = ''
                     }, err => {
                         console.log(err) //TODO: url error
                     })

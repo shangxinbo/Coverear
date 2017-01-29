@@ -15,7 +15,7 @@ let mainWindow
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 500,
+        width: 400,
         height: 700,
         //resizable: false,
         title: 'coverear'
