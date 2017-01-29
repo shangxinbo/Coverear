@@ -11,7 +11,7 @@
         <ul class="list-body active-list">
             <li v-for="(tr,index) in list" :style="tr.style">
                 <div class="select">
-                    <input :id="tr.gid" type="checkbox" />
+                    <input :id="tr.gid" :path="tr.dir" type="checkbox" />
                     <label :for="tr.gid"></label>
                 </div>
                 <div class="info">
@@ -34,8 +34,8 @@
                 <div class="info">
                     <div>{{tr.files[0].path | fileName}}</div>
                     <div class="label">
-                        <span>{{tr.completedLength | byte }}/{{tr.totalLength | byte}}</span>
-                        <span>{{tr.downloadSpeed | speed}}</span>
+                        <span class="progress">{{tr.totalLength | byte}}</span>
+                        <span class="blue-text">links:{{tr.files[0].uris.length}}</span>
                     </div>
                 </div>
             </li>
@@ -77,17 +77,35 @@
             </div>
         </div>
     </script>
+    <script type="text/x-template" id="detailDialog">
+        <div class="dialog" v-show="show">
+            <div class="close-dialog" @click="close"></div>
+        </div>
+    </script>
+    <script type="text/x-template" id="setDialog">
+        <div class="dialog" v-show="show">
+            <div class="close-dialog" @click="close"></div>
+        </div>
+    </script>
 </head>
 
 <body>
     <div id="app">
+        <div>
+            <h2 class="app-name">Coverear</h2>
+            <div>通知</div>
+        </div>
         <div class="header">
             <a class="col-3 add" @click="addUri" href="javascript:void(0)" title="添加资源"></a>
+            <!--<a class="col-3 adduri" @click="addUri" href="javascript:void(0)" title="通过连接添加"></a>
+            <a class="col-3 addfile" @click="addUri" href="javascript:void(0)" title="通过文件添加"></a>-->
             <a class="col-3 stop" @click="stop" v-show="nav==1" href="javascript:void(0)" title="停止"></a>
             <a class="col-3 play" @click="start" v-show="nav==3" href="javascript:void(0)" title="开始"></a>
-            <a class="col-3 delete" @click="del" href="javascript:void(0)" title="删除"></a>
+            <a class="col-3 redown" @click="redown" v-show="nav==2" href="javascript:void(0)" title="详细"></a>
+            <a class="col-3 delete" @click="del" v-show="nav==2||nav==3" href="javascript:void(0)" title="删除"></a>
+            <a class="col-3 detail" @click="showDetail" v-show="nav==1" href="javascript:void(0)" title="详细"></a>
+            <a class="col-3 folder" @click="openFolder" href="javascript:void(0)" title="打开文件夹"></a>
             <a class="col-3 set" @click="set" href="javascript:void(0)" title="设置"></a>
-            </a>
         </div>
         <div class="list">
             <div class="list-group" :class="{active:nav==1}">
@@ -95,7 +113,7 @@
                 <active-list></active-list>
             </div>
             <div class="list-group" :class="{active:nav==2}">
-                <div class="list-type" @click="changeNav(2)">下载结束<span class="arrow">&nbsp;</span></div>
+                <div class="list-type" @click="changeNav(2)">下载完成<span class="arrow">&nbsp;</span></div>
                 <complete-list></complete-list>
             </div>
             <div class="list-group" :class="{active:nav==3}">
@@ -104,6 +122,8 @@
             </div>
         </div>
         <add-source></add-source>
+        <detail-dialog></detail-dialog>
+        <set-dialog></set-dialog>
     </div>
 </body>
 <script>

@@ -1,0 +1,8 @@
+2017-01-29 17:49:02.129860 [ERROR] [SaveSessionCommand.cc:86] Failed to serialize session to 'E:\xDownload\aria2\aria2.log'.
+2017-01-29 17:49:41.149078 [ERROR] [download_helper.cc:423] Unrecognized URI or unsupported protocol: 2017-01-29 17:49:02.129860 [ERROR] [SaveSessionCommand.cc:86] Failed to serialize session to 'E:\xDownload\aria2\aria2.log'.
+2017-01-29 19:40:59.733206 [ERROR] [AbstractCommand.cc:403] CUID#23 - Download aborted. URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip%09
+Exception: [AbstractCommand.cc:403] errorCode=4 URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip%09
+  -> [RequestGroup.cc:1267] errorCode=4 Reached max-file-not-found count=5
+2017-01-29 21:08:10.844799 [ERROR] [AbstractCommand.cc:351] CUID#14 - Download aborted. URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+Exception: [AbstractCommand.cc:351] errorCode=5 URI=https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip
+  -> [DownloadCommand.cc:312] errorCode=5 Too slow Downloading speed: 6019 <= 10240(B/s), host:noto-website-2.storage.googleapis.com

@@ -7,6 +7,9 @@ const activeList = require('./components/active-list')
 const completeList = require('./components/complete-list')
 const pauseList = require('./components/pause-list')
 const addSource = require('./components/add-source')
+const detail = require('./components/detail')
+const set = require('./components/set')
+const exec = require('child_process').exec
 
 let options = {
     host: 'localhost',
@@ -28,6 +31,8 @@ aria2.open(function() {
     completeList.create(aria2)
     pauseList.create(aria2)
     let typeBus = addSource.dialog(aria2)
+    let detailBus = detail.dialog(aria2)
+    let setBus = set.dialog(aria2)
 
     new Vue({
         el: '#app',
@@ -39,16 +44,17 @@ aria2.open(function() {
         methods: { // 不能用箭头函数
             addUri: function(url) {
                 typeBus.$emit('showDialog')
-                    //aria2.send('addUri', ['https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKsc-hinted.zip']).then((m) => {})
             },
             changeNav: function(num) {
                 this.nav = num
+            },
+            showDetail: function() {
+                detailBus.$emit('showDialog')
             },
             stop: function() {
                 let checked = getCheck(this.nav)
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('id')
-                    console.log(gid)
                     aria2.pause(gid).then('', err => {
                         console.log(err) //TODO: 报错提示
                     })
@@ -56,7 +62,6 @@ aria2.open(function() {
             },
             start: function() {
                 let checked = getCheck(this.nav)
-                console.log(this.nav)
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('id')
                     aria2.unpause(gid).then('', err => {
@@ -68,13 +73,48 @@ aria2.open(function() {
                 let checked = getCheck(this.nav)
                 for (let i = 0; i < checked.length; i++) {
                     let gid = checked[i].getAttribute('id')
-                    aria2.remove(gid).then('', err => {
-                        console.log(err) //TODO: 报错提示
+                    switch (this.nav) {
+                        case 1:
+                            //TODO: 正在进行的下载不能直接删除，需要暂停再删除
+                            break
+                        case 2:
+                            aria2.removeDownloadResult(gid).then('', err => {
+                                console.log(err) //TODO: 报错提示
+                            })
+                            break
+                        case 3:
+                            aria2.remove(gid).then('', err => {
+                                aria2.removeDownloadResult(gid).then('', err => {
+                                    console.log(err) //TODO: 报错提示
+                                })
+                            })
+                            break
+                        default:
+                            break;
+                    }
+                }
+            },
+            openFolder: function() {
+                let checked = getCheck(this.nav)
+                let path_arr = []
+                for (let i = 0; i < checked.length; i++) {
+                    let path = checked[i].getAttribute('path')
+                    if (!path_arr.includes(path)) {
+                        path_arr.push(path)
+                    }
+                }
+
+                for (let j = 0; j < path_arr.length; j++) {
+                    exec('start ' + path_arr[j], function(err) {
+                        console.log(err)
                     })
                 }
             },
             set: function() {
-                //TODO: 
+                setBus.$emit('showDialog')
+            },
+            redown: function() {
+                //TODO: redown
             }
         }
     })
