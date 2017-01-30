@@ -25,6 +25,13 @@ exports.dialog = function(aria2) {
                     DOWN_PATH: this.dir,
                     ALL_PROXY: this.proxy
                 })
+
+                if (_this.dir) {
+                    aria2.send('changeGlobalOption', {
+                        dir: editJson.DOWN_PATH
+                    })
+                }
+
                 fs.writeFile(join(__dirname, '../../config.json'), JSON.stringify(editJson), 'utf8', (err) => {
                     if (err) {
                         console.log(err)
