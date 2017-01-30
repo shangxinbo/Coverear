@@ -34,7 +34,7 @@ aria2.open(function() {
     let detailBus = detail.dialog(aria2)
     let setBus = set.dialog(aria2)
 
-    new Vue({
+    let app = new Vue({
         el: '#app',
         data: function() {
             return {
@@ -118,6 +118,16 @@ aria2.open(function() {
             }
         }
     })
+
+
+    aria2.onDownloadPause = function(m) {
+        app.$data.nav = 3
+    }
+
+    aria2.onDownloadComplete = function(m) {
+        app.$data.nav = 2
+    }
+
 })
 
 

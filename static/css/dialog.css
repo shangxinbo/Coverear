@@ -1,5 +1,5 @@
 .dialog {
-    background: rgba(237, 237, 237, 0.65);
+    background: rgba(237, 237, 237, 0.8);
     position: absolute;
     top: 0;
     left: 0;
@@ -55,4 +55,22 @@
     margin-left: -6rem;
     bottom: 0;
     cursor: pointer;
+}
+
+.dialog-form {
+    width: 15rem;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.dialog-form .filed {
+    margin-bottom: 0.5rem;
+}
+
+.dialog-form input {
+    display: block;
+    border: 1px solid #20a0ff;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    width: 100%;
 }

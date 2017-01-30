@@ -28,7 +28,7 @@
         <ul class="list-body complete-list">
             <li v-for="(tr,index) in list" :style="tr.style" :gid="tr.gid">
                 <div class="select">
-                    <input :id="tr.gid" type="checkbox" />
+                    <input :id="tr.gid" :path="tr.dir" type="checkbox" />
                     <label :for="tr.gid"></label>
                 </div>
                 <div class="info">
@@ -45,7 +45,7 @@
         <ul class="list-body pause-list">
             <li v-for="(tr,index) in list" :style="tr.style" :gid="tr.gid">
                 <div class="select">
-                    <input :id="tr.gid" type="checkbox" />
+                    <input :id="tr.gid" :path="tr.dir" type="checkbox" />
                     <label :for="tr.gid"></label>
                 </div>
                 <div class="info">
@@ -80,6 +80,17 @@
     <script type="text/x-template" id="setDialog">
         <div class="dialog" v-show="show">
             <div class="close-dialog" @click="close"></div>
+            <div class="dialog-form">
+                <div class="filed">
+                    <div>Aria2 JSON-RPC:</div>
+                    <input type="text" placeholder="Default http://localhost:6800/jsonrpc" v-model="rpc" />
+                </div>
+                <div class="filed">
+                    <div>Dir For Download Files:</div>
+                    <input type="text" placeholder="Default E:/xdownload/downDir" v-model="dir" />
+                </div>
+                <a class="button-large" @click="submit">提交</a>
+            </div>
         </div>
     </script>
 </head>
