@@ -5,5 +5,6 @@ module.exports = {
     "ARIA2_CONF": join(__dirname, '../../aria2/aria2.conf'),
     "ARIA2_LOG": join(__dirname, '../../aria2/aria2.log'),
     "ARIA2_SESSION": join(__dirname, '../../aria2/aria2.session'),
-    "DOWN_PATH": join(__dirname, '../../downDir')
+    "DOWN_PATH": join(__dirname, '../../downDir'),
+    "ALL_PROXY": ''
 }

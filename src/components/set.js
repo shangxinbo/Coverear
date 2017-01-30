@@ -10,7 +10,8 @@ exports.dialog = function(aria2) {
             return {
                 show: false,
                 rpc: config.ARIA2_EXE,
-                dir: config.DOWN_PATH
+                dir: config.DOWN_PATH,
+                proxy: config.ALL_PROXY
             }
         },
         methods: {
@@ -21,7 +22,8 @@ exports.dialog = function(aria2) {
                 let _this = this
                 let editJson = Object.assign({}, config, {
                     ARIA2_EXE: this.rpc,
-                    DOWN_PATH: this.dir
+                    DOWN_PATH: this.dir,
+                    ALL_PROXY: this.proxy
                 })
                 fs.writeFile(join(__dirname, '../../config.json'), JSON.stringify(editJson), 'utf8', (err) => {
                     if (err) {

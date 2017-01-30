@@ -9,6 +9,7 @@ const pauseList = require('./components/pause-list')
 const addSource = require('./components/add-source')
 const detail = require('./components/detail')
 const set = require('./components/set')
+const statusBar = require('./components/status-bar')
 const exec = require('child_process').exec
 
 let options = {
@@ -33,6 +34,7 @@ aria2.open(function() {
     let typeBus = addSource.dialog(aria2)
     let detailBus = detail.dialog(aria2)
     let setBus = set.dialog(aria2)
+    let statusBus = statusBar.show()
 
     let app = new Vue({
         el: '#app',

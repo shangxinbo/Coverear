@@ -63,8 +63,10 @@
             <div class="close-dialog" @click="close"></div>
             <div class="choose-type" v-show="step==1">
                 <a class="button-large" @click="goStep(2)">新建URl下载</a>
-                <a class="button-large" @click="startFromFile">.torrent,.matelink文件</a>
-                <input type="file" accept=".torrent,.matelink" @change="changeFile" />
+                <a class="button-large" @click="startFromTorrent">.torrent文件</a>
+                <input class="torrent" type="file" accept=".torrent" @change="changeTorrent" />
+                <a class="button-large" @click="startFromMatelink">.matelink文件</a>
+                <input class="matelink" type="file" accept=".matelink" @change="changeMatelink" />
             </div>
             <div class="choose-type" v-show="step==2">
                 <textarea rows="7" v-model="link" placeholder="http|https|ftp|sftp|magnet support"></textarea>
@@ -89,9 +91,16 @@
                     <div>Dir For Download Files:</div>
                     <input type="text" placeholder="Default E:/xdownload/downDir" v-model="dir" />
                 </div>
+                <div class="filed">
+                    <div>All Proxy:</div>
+                    <input type="text" placeholder="" v-model="proxy" />
+                </div>
                 <a class="button-large" @click="submit">提交</a>
             </div>
         </div>
+    </script>
+    <script type="text/x-template" id="statusBar">
+        <div></div>
     </script>
 </head>
 
@@ -127,6 +136,7 @@
                 <pause-list></pause-list>
             </div>
         </div>
+        <status-bar></status-bar>
         <add-source></add-source>
         <detail-dialog></detail-dialog>
         <set-dialog></set-dialog>
