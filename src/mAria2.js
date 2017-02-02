@@ -15,6 +15,7 @@ exports.startJsonRPC = (callback) => {
         ])
         let run = 1;
         child.stdout.on('data', (data) => {
+            console.log(data.toString('utf-8'))
             if (callback && run) {
                 callback()
                 run = 0;

@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 function linkCheck(link) {
-    let reg = /^(http|ftp|https|sftp|magnet):\/\/([\s\S]*)$/
+    let reg = /^(http|ftp|https|sftp|magnet):([\s\S]*)$/
     return reg.test(link)
 }
 
@@ -14,8 +14,6 @@ exports.dialog = function(aria2) {
                 show: false,
                 step: 1,
                 link: '',
-                torrent: '',
-                matelink: ''
             }
         },
         methods: {
@@ -23,17 +21,9 @@ exports.dialog = function(aria2) {
                 this.show = false
                 this.step = 1
                 this.link = ''
-                this.torrent = ''
-                this.matelink = ''
             },
             goStep: function(num) {
                 this.step = num
-            },
-            changeTorrent: function(evt) {
-                this.torrent = evt.target.files[0].path
-            },
-            changeMatelink: function(evt) {
-                this.matelink = evt.target.files[0].path
             },
             startFromLink: function() {
                 const _this = this
@@ -47,26 +37,26 @@ exports.dialog = function(aria2) {
                     })
                 }
             },
-            startFromTorrent: function() {
+            startFromTorrent: function(evt) {
                 const _this = this
-                if (this.torrent) {
-                    fs.readFile(_this.torrent, 'base64', function(err, data) {
+                const torrent = evt.target.files[0].path
+                if (torrent) {
+                    fs.readFile(torrent, 'base64', function(err, data) {
                         aria2.send('addTorrent', data).then(m => {
                             _this.show = false
-                            _this.torrent = ''
                         }, err => {
                             console.log(err) //TODO: url error
                         })
                     })
                 }
             },
-            startFromMatelink: function() {
+            startFromMatelink: function(evt) {
                 const _this = this
-                if (this.matelink) {
-                    fs.readFile(_this.matelink, 'base64', function(err, data) {
+                const matelink = evt.target.files[0].path
+                if (matelink) {
+                    fs.readFile(matelink, 'base64', function(err, data) {
                         aria2.send('addMetalink', data).then(m => {
                             _this.show = false
-                            _this.matelink = ''
                         }, err => {
                             console.log(err) //TODO: url error
                         })

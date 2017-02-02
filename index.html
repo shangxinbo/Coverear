@@ -63,10 +63,10 @@
             <div class="close-dialog" @click="close"></div>
             <div class="choose-type" v-show="step==1">
                 <a class="button-large" @click="goStep(2)">新建URl下载</a>
-                <a class="button-large" @click="startFromTorrent">.torrent文件</a>
-                <input class="torrent" type="file" accept=".torrent" @change="changeTorrent" />
-                <a class="button-large" @click="startFromMatelink">.matelink文件</a>
-                <input class="matelink" type="file" accept=".matelink" @change="changeMatelink" />
+                <a class="button-large">.torrent文件</a>
+                <input class="torrent" type="file" accept=".torrent" @change="startFromTorrent" />
+                <a class="button-large">.matelink文件</a>
+                <input class="matelink" type="file" accept=".matelink" @change="startFromMatelink" />
             </div>
             <div class="choose-type" v-show="step==2">
                 <textarea rows="7" v-model="link" placeholder="http|https|ftp|sftp|magnet support"></textarea>
