@@ -34,3 +34,7 @@ Exception: [DefaultBtAnnounce.cc:303] errorCode=1 Tracker returned failure reaso
 2017-01-31 18:52:38.763002 [ERROR] [AbstractCommand.cc:378] CUID#29 - Download aborted. URI=http://tracker.pimp4003.net/announce?info_hash=%85%D3%D8%1E%FC%83%20%8BM%DFsR%3BT%03%D1%10%23%C5%7B&peer_id=A2-1-31-0-%2A%89%ABI%04%D6f%84%B3%7C&uploaded=0&downloaded=0&left=4173755548&compact=1&key=%ABI%04%D6f%84%B3%7C&numwant=50&no_peer_id=1&port=7997&event=started&supportcrypto=1
 Exception: [SocketCore.cc:874] errorCode=1 Failed to receive data, cause: An existing connection was forcibly closed by the remote host.
 
+2017-02-03 09:44:54.479183 [ERROR] [download_helper.cc:423] Unrecognized URI or unsupported protocol: E:/xDownload/downDir/ed7759f907ce6ff6aecf26c3499e2479b55affb6.torrent
+2017-02-03 09:44:54.479183 [ERROR] [download_helper.cc:423] Unrecognized URI or unsupported protocol: E:/xDownload/downDir/17a8919f7e80aba0e728eb6ec93b2320a863d33b.torrent
+2017-02-03 09:45:29.986814 [ERROR] [DHTSetup.cc:109] Exception caught while loading DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
+Exception: [DHTRoutingTableDeserializer.cc:83] errorCode=1 Failed to load DHT routing table from C:/Users/31491/.cache/aria2/dht.dat
